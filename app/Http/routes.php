@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('shop.index');
-});
+Route::get('/', ['uses' => 'ProductController@getIndex','as' => 'product.index','middleware' => 'auth']);
+
+Route::get('/add-to-cart/{id}', ['uses' => 'ProductController@getAddToCart','as' => 'product.addToCart','middleware' => 'auth']);
+
+Route::get('/shoppingCart', ['uses' => 'ProductController@getCart','as' => 'product.shoppingCart','middleware' => 'auth']);
+
+Route::get('/checkout', ['uses' => 'ProductController@getCheckout','as' => 'checkout','middleware' => 'auth']);
+
+Route::post('/checkout', ['uses' => 'ProductController@postCheckout','as' => 'checkout','middleware' => 'auth']);
 
 Route::auth();
 
